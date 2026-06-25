@@ -1,0 +1,143 @@
+/*
+ * KITE global styles.
+ *
+ * Authoring concerns (task 1.4):
+ *   - flag-icons CSS sprite import (SVG country flags via `.fi .fi-${code}`)
+ *   - Tailwind base/components/utilities layers
+ *   - Canonical design-token CSS variables (space-separated HSL triplets so
+ *     `hsl(var(--token))` in tailwind.config.ts resolves to the KITE palette)
+ *   - CSS-only Hero grid-pattern decoration (faint lines, AA-safe contrast)
+ *   - CSS-only AI Assistant button pulse/glow loop
+ *   - prefers-reduced-motion fallback (disables animation + transition globally)
+ *
+ * Reference Aesthetic (binding): NO gradient backgrounds, NO decorative blobs/
+ * waves/shapes. The ONLY permitted decorations are the Hero grid pattern and the
+ * AI button pulse/glow defined below.
+ *
+ * NOTE: `@import` must precede the `@tailwind` directives (PostCSS / postcss-import
+ * requires imports at the top of the file), otherwise the build emits a warning and
+ * the flag sprite may not resolve.
+ */
+@import "flag-icons/css/flag-icons.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Canonical KITE tokens — HSL triplets (no hsl() wrapper) so that
+     * `hsl(var(--token))` composes correctly in tailwind.config.ts. */
+    --primary: 211 68% 33%;     /* #1B4D8E  Karnataka Blue */
+    --accent: 16 81% 53%;       /* #E85D26  Karnataka Orange */
+    --dark: 215 49% 12%;        /* #0F1B2D */
+    --surface: 220 20% 97%;     /* #F7F8FA */
+    --card: 0 0% 100%;          /* #FFFFFF */
+    --muted: 215 16% 47%;       /* #64748B */
+    --border: 214 32% 91%;      /* #E2E8F0 */
+    --success: 142 71% 36%;     /* #16A34A */
+    --warning: 33 90% 44%;      /* #D97706 */
+    --danger: 0 72% 51%;        /* #DC2626 */
+    --info: 199 89% 48%;        /* #0EA5E9 */
+    --teal: 175 84% 32%;        /* #0D9488 */
+    --purple: 263 70% 58%;      /* #7C3AED */
+    --pink: 330 81% 47%;        /* #DB2777 */
+
+    /*
+     * shadcn/ui base variables (task 1.5) — ADDITIVE.
+     * These are the extra semantic variables the shadcn primitives reference
+     * (background/foreground, *-foreground pairings, popover, destructive,
+     * input, ring). A neutral base color is used so the canonical KITE tokens
+     * above remain the single source of truth; nothing above is removed or
+     * renamed. `--card`, `--muted`, `--border`, `--primary`, `--accent` are the
+     * canonical tokens and are intentionally NOT redeclared here.
+     */
+    --background: 0 0% 100%;            /* page background (neutral white) */
+    --foreground: 222 47% 11%;          /* default text on background */
+    --card-foreground: 222 47% 11%;     /* text on card surfaces */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary-foreground: 0 0% 100%;    /* text on --primary (Karnataka Blue) */
+    --accent-foreground: 0 0% 100%;     /* text on --accent (Karnataka Orange) */
+    --muted-foreground: 215 16% 47%;    /* secondary text (matches --muted) */
+    --destructive: 0 72% 51%;           /* mirrors canonical --danger */
+    --destructive-foreground: 0 0% 100%;
+    --input: 214 32% 91%;               /* matches canonical --border */
+    --ring: 211 68% 33%;                /* focus ring (matches --primary) */
+  }
+
+  /* Sensible global defaults — flat surface background, no gradients. */
+  body {
+    background-color: hsl(var(--surface));
+    color: hsl(var(--dark));
+  }
+}
+
+@layer components {
+  /*
+   * Hero grid pattern (CSS-only, no images).
+   * Faint 1px lines on a 40px grid. Kept very low-contrast (≈4% white) so it
+   * sits behind Hero text on the `dark` background without eroding the WCAG AA
+   * contrast of the foreground copy. Apply alongside `bg-dark`.
+   */
+  .hero-grid-pattern {
+    background-image:
+      repeating-linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.04) 0,
+        rgba(255, 255, 255, 0.04) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.04) 0,
+        rgba(255, 255, 255, 0.04) 1px,
+        transparent 1px,
+        transparent 40px
+      );
+    background-position: center top;
+  }
+}
+
+@layer utilities {
+  /*
+   * AI Assistant button pulse/glow (CSS-only, continuous loop).
+   * `animate-ai-pulse` runs an infinite expanding glow ring + subtle scale pulse.
+   * Suppressed entirely under prefers-reduced-motion (see media query below).
+   */
+  .animate-ai-pulse {
+    animation: ai-pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes ai-pulse {
+  0% {
+    box-shadow: 0 0 0 0 hsl(var(--accent) / 0.5);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 12px hsl(var(--accent) / 0);
+    transform: scale(1.04);
+  }
+  100% {
+    box-shadow: 0 0 0 0 hsl(var(--accent) / 0);
+    transform: scale(1);
+  }
+}
+
+/*
+ * Reduced-motion fallback (Req 21.7, 22.1).
+ * Disables all animations and transitions so count-up renders its final value
+ * immediately and the AI pulse/glow falls back to a static button.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
