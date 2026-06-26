@@ -754,3 +754,137 @@ export interface IdeaBoardFilters {
   innovatorType: InnovatorType | null;
   location: LocationKarnataka | null;
 }
+
+// ===========================================================================
+// KITE Events, GIA, AI Assistant & Support (Prompt 8, Closing) — additive types.
+// Reuses existing GIARegion, GIACountry, EcosystemEvent, EventCategory.
+// No existing export above is altered or removed. All shapes compile under
+// `strict` + `noUncheckedIndexedAccess`.
+// ===========================================================================
+
+// --- Events & media ---
+export type PressType =
+  | 'major-press' | 'business-press' | 'tech-press' | 'international-press';
+
+export interface PressMention {
+  id: string;
+  publication: string;
+  publicationType: PressType;
+  headline: string;
+  dateLabel: string;        // relative label, never clock-derived
+  excerpt: string;
+  href: string;             // illustrative placeholder URL
+}
+
+export interface GovAnnouncement {
+  id: string;
+  title: string;
+  department: string;
+  dateLabel: string;        // relative label
+  summary: string;
+  sourceHref: string;       // EITBT portal
+}
+
+// --- GIA synthetic ---
+export interface RecentEngagement {
+  id: string;
+  countryCode: string;      // ISO 3166-1 alpha-2 (lowercase)
+  title: string;
+  dateLabel: string;
+  summary: string;
+}
+
+export interface BilateralProgram {
+  id: string;
+  name: string;
+  focusArea: string;
+  sinceYear: number;
+  description: string;
+  status: 'active' | 'upcoming';
+}
+
+export interface CountrySuccessStory {
+  id: string;
+  startupName: string;
+  sector: string;
+  outcome: string;
+}
+
+export interface CountryStartupEngagement {
+  id: string;
+  startupName: string;
+  sector: string;
+  engagementType: string;
+  description: string;
+}
+
+export interface GiaRegionSummary {
+  region: GIARegion;
+  countryCount: number;
+  focusAreas: string[];     // representative focus areas across the region
+}
+
+// --- Support ---
+export type FaqCategory =
+  | 'Registration' | 'Eligibility' | 'Schemes' | 'Application'
+  | 'Disbursement' | 'Women Founders' | 'Beyond Bengaluru'
+  | 'Programs' | 'International' | 'Escalation';
+
+export interface FaqItem {
+  id: string;
+  category: FaqCategory;
+  question: string;
+  answer: string;
+  relatedLinks: { label: string; href: string }[];
+}
+
+export interface DepartmentContact {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  illustrative: boolean;    // true when the contact detail is illustrative
+}
+
+export interface SupportTicketDraft {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+// --- AI chat ---
+export type ChatRole = 'user' | 'assistant';
+
+export interface ChatSuggestion {
+  label: string;
+  href: string;             // internal KITE route
+}
+
+export interface ChatMessage {
+  id: string;
+  role: ChatRole;
+  content: string;
+  suggestions?: ChatSuggestion[];  // assistant follow-up route chips
+}
+
+export interface AssistantResponse {
+  text: string;
+  suggestions: ChatSuggestion[];
+}
+
+export interface ChatState {
+  messages: ChatMessage[];
+  input: string;
+  loading: boolean;
+  error: string | null;
+  exchanges: number;        // count of user→assistant round trips (cap at 20)
+}
+
+export type ChatAction =
+  | { type: 'SET_INPUT'; value: string }
+  | { type: 'SEND'; message: ChatMessage }
+  | { type: 'START_LOADING' }
+  | { type: 'RECEIVE'; message: ChatMessage }
+  | { type: 'ERROR'; error: string }
+  | { type: 'CLEAR' };

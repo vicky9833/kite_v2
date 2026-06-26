@@ -47,7 +47,7 @@ vi.mock("next/link", () => ({
 // behavior is covered by that slice's Investor Connect tests). `/investors/pipeline`
 // remains a stub (the live Deal Pipeline lives at `/dashboard/investor/pipeline`).
 import AboutPage from "@/app/about/page";
-import FaqsPage from "@/app/support/faqs/page";
+import ContactPage from "@/app/contact/page";
 import PrivacyPage from "@/app/privacy/page";
 import InvestorPipelinePage from "@/app/investors/pipeline/page";
 
@@ -85,7 +85,7 @@ describe("static route stubs", () => {
   const staticPages: ReadonlyArray<readonly [string, () => React.JSX.Element]> =
     [
       ["about", AboutPage],
-      ["support/faqs", FaqsPage],
+      ["contact", ContactPage],
       ["privacy", PrivacyPage],
       ["investors/pipeline", InvestorPipelinePage],
     ];
