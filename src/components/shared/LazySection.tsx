@@ -12,9 +12,14 @@ import { cn } from "@/lib/utils";
  * surrounding layout (no CLS — Req 22.5). Callers reserve the right space via
  * `minHeight`.
  *
- * SSR / no-IntersectionObserver safety: if `IntersectionObserver` is
- * unavailable (server render or unsupported environment) the children render
- * immediately rather than being hidden behind a skeleton that never resolves.
+ * Hydration safety: the FIRST render is identical on the server and the client
+ * — it always renders the `Skeleton` placeholder (`isVisible` starts `false`).
+ * Only AFTER hydration (inside `useEffect`, which never runs on the server) does
+ * the component either (a) set up the `IntersectionObserver` and swap to the
+ * real content once the section nears the viewport, or (b) — when
+ * `IntersectionObserver` is unavailable (older/unsupported environments) —
+ * reveal the children immediately. This avoids the server/client markup
+ * divergence that previously produced a "div in a div" hydration error.
  *
  * Client Component (uses `IntersectionObserver` + state).
  */
@@ -41,17 +46,27 @@ export function LazySection({
   minHeight,
   className,
 }: LazySectionProps) {
-  // Render eagerly when IntersectionObserver is not available (SSR / unsupported).
-  const [isVisible, setIsVisible] = useState(() => !hasIntersectionObserver());
+  // Start hidden on BOTH server and client so the first paint matches exactly
+  // (no hydration mismatch). The observer/eager-reveal is wired post-mount in
+  // the effect below, which never runs during SSR.
+  const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isVisible || !hasIntersectionObserver()) {
+    if (isVisible) {
+      return;
+    }
+
+    // No IntersectionObserver support → reveal immediately after mount.
+    if (!hasIntersectionObserver()) {
+      setIsVisible(true);
       return;
     }
 
     const node = containerRef.current;
     if (!node) {
+      // Defensive: nothing to observe → reveal so content never gets stuck.
+      setIsVisible(true);
       return;
     }
 

@@ -888,3 +888,19 @@ export type ChatAction =
   | { type: 'RECEIVE'; message: ChatMessage }
   | { type: 'ERROR'; error: string }
   | { type: 'CLEAR' };
+
+// ===========================================================================
+// Home ecosystem-news carousel (v1.0.1 polish patch) — additive types.
+// ===========================================================================
+
+export type EcosystemNewsCategory =
+  | 'Funding' | 'Policy' | 'Partnership' | 'Achievement' | 'Event' | 'Recognition';
+
+export interface EcosystemNewsItem {
+  id: string;
+  headline: string;
+  summary: string;          // one-line
+  dateRelative: string;     // e.g. "2 days ago" — never clock-derived
+  category: EcosystemNewsCategory;
+  href: string;             // routes to a relevant existing KITE page
+}

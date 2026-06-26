@@ -224,7 +224,7 @@ Shared infrastructure adds a code-split chart wrapper architecture over Recharts
 1. WHILE Viewport_Desktop, THE Admin_Dashboard SHALL render the KPI grid as six stat cards in a three-by-two layout.
 2. WHILE Viewport_Tablet, THE Admin_Dashboard SHALL render the KPI grid as a two-by-three layout.
 3. WHILE Viewport_Mobile, THE Admin_Dashboard SHALL render the KPI grid as a single column.
-4. THE Admin_Dashboard SHALL display a Total Registered Startups card with value 16,234 and trend indicator "+4.2% QoQ".
+4. THE Admin_Dashboard SHALL display a Total Registered Startups card with value 21,847 and trend indicator "+4.2% QoQ".
 5. THE Admin_Dashboard SHALL display a Total Benefits Disbursed card with value "₹312 crore".
 6. THE Admin_Dashboard SHALL display an Active Schemes card with value 22 and caption "All schemes operational".
 7. THE Admin_Dashboard SHALL display a Scheme Applications Last Month card with value 1,847.

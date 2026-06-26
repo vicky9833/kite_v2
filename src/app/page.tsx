@@ -16,6 +16,7 @@
 // This stays a Server Component (no "use client"); LazySection is a Client
 // Component used purely as a wrapper around the (server/client) section children.
 import { HeroSection } from "@/components/home/HeroSection";
+import { EcosystemNewsCarousel } from "@/components/home/EcosystemNewsCarousel";
 import { LiveMetricsSection } from "@/components/home/LiveMetricsSection";
 import { QuickActionsSection } from "@/components/home/QuickActionsSection";
 import { FlagshipProgramsSection } from "@/components/home/FlagshipProgramsSection";
@@ -33,6 +34,9 @@ export default function Home() {
     <>
       {/* Above-the-fold — rendered eagerly for fast first paint. */}
       <HeroSection />
+      {/* Ecosystem news carousel — part of the hero composition, above the
+          verified live-metrics strip (v1.0.1 polish patch). */}
+      <EcosystemNewsCarousel />
       <LiveMetricsSection />
       <QuickActionsSection />
 

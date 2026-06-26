@@ -32,7 +32,7 @@ const REPORT_SAMPLE_TEXT = [
   "This is an illustrative sample report generated entirely in your browser.",
   "It contains placeholder figures only and is not an official record.",
   "",
-  "Total Registered Startups:            16,234",
+  "Total Registered Startups:            21,847",
   "Total Benefits Disbursed:             ₹312 crore",
   "Active Schemes:                       22",
   "Scheme Applications (last month):     1,847",

@@ -626,7 +626,7 @@ Key invariants baked into the generators:
   real count, `jointPrograms` is synthetic/illustrative.
 - `getActivityFeed` length is seeded into `[15, 20]`.
 
-The KPI values in `ADMIN_KPIS` are the fixed figures mandated by Req 12 (16,234; ₹312 crore; 22; 1,847;
+The KPI values in `ADMIN_KPIS` track the verified figures (21,847 registered startups — just above the verified 21,000+ DPIIT figure; ₹312 crore; 22; 1,847;
 ₹19 lakh; 183) — they are constants, not random, but still carry an `Illustrative_Label` in the UI.
 
 ---

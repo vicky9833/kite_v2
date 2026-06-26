@@ -4,7 +4,7 @@
 
 KITE is a government-grade web portal for Karnataka's startup and innovation
 ecosystem. This repository contains the **complete, feature-complete build** —
-all eight prompt slices shipped (v1.0.0). It spans the public home and chrome,
+all eight prompt slices shipped (v1.0.1). It spans the public home and chrome,
 registration and the policy calculator, the 22-scheme hub, startup/admin/investor
 dashboards, the investor suite, the ecosystem enablement layer (incubators &
 mentors), the inclusion & grassroots layer (women founders, CSR/NGO, idea bank),
@@ -132,6 +132,29 @@ Four principles held across all eight prompts:
 
 ## Status
 
-Feature-complete — **v1.0.0**. All eight prompt slices shipped; the full test
+Feature-complete — **v1.0.1**. All eight prompt slices shipped; the full test
 suite passes; the production build succeeds with every route under the 150KB
 First Load JS ceiling.
+
+### v1.0.1 — production polish patch
+
+Six deployment-surfaced issues fixed plus one enhancement:
+
+1. **Hydration error** — `LazySection` now renders the skeleton identically on
+   server and client first paint, wiring the `IntersectionObserver` only after
+   mount (no more "div in a div" mismatch).
+2. **Header dropdown positioning** — `NavigationMenu` dropdowns now anchor
+   directly below their trigger (left-aligned) instead of floating centered
+   under the menu.
+3. **Register button visibility** — header layout tightened (tagline, language
+   toggle, bell, Sign In, and full search gate to `xl`; compact search below)
+   so the Register CTA stays visible at every desktop width from 1024px up.
+4. **Startup dashboard rendering** — resolved by the `LazySection` fix; the
+   registration gate continues to redirect unregistered sessions cleanly.
+5. **Admin DPIIT figure** — Total Registered Startups updated from 16,234 to
+   21,847, tracking just above the verified 21,000+ DPIIT figure.
+6. **Reports page** — `/reports` upgraded from a bare stub to a credible
+   content-forthcoming surface (report catalogue + notify-me form).
+7. **Ecosystem news carousel** — a new, deterministic, accessible home-hero
+   carousel of illustrative Karnataka ecosystem updates (auto-advance, pause on
+   hover, keyboard, ARIA).

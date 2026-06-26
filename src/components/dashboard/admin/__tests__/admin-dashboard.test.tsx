@@ -11,7 +11,7 @@
  *     "Preview" badge, the "Karnataka EITBT Department, KITS, KDEM" attribution,
  *     and the fixed "Last updated 14 hours ago" freshness label.
  *   - Notice banner (Req 11.5): the Phase-2 illustrative-data preview copy.
- *   - KPI grid (Req 12): the six fixed headline values (16,234; ₹312 crore; 22;
+ *   - KPI grid (Req 12): the six fixed headline values (21,847; ₹312 crore; 22;
  *     1,847; ₹19 lakh; 183).
  *   - Below-the-fold sections inside LazySection (Req 13, 14, 17, 18, 19, 20,
  *     21, 22): their headings mount in jsdom because `IntersectionObserver` is
@@ -138,7 +138,7 @@ describe("Admin dashboard composition (Req 11, 12, 13, 14, 17, 18, 19, 20, 21, 2
   it("renders the six fixed KPI cards (Req 12)", () => {
     render(<AdminDashboardPage />);
 
-    expect(screen.getByText("16,234")).toBeInTheDocument();
+    expect(screen.getByText("21,847")).toBeInTheDocument();
     expect(screen.getByText("₹312 crore")).toBeInTheDocument();
     expect(screen.getByText("22")).toBeInTheDocument();
     expect(screen.getByText("1,847")).toBeInTheDocument();

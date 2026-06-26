@@ -20,7 +20,10 @@ const NavigationMenu = React.forwardRef<
     {...props}
   >
     {children}
-    <NavigationMenuViewport />
+    {/* No shared Viewport: each NavigationMenuContent positions itself directly
+        beneath its own trigger (see NavigationMenuItem / NavigationMenuContent),
+        so dropdowns open below + left-aligned with the button that opened them
+        rather than floating centered under the whole menu. */}
   </NavigationMenuPrimitive.Root>
 ))
 NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
@@ -40,7 +43,19 @@ const NavigationMenuList = React.forwardRef<
 ))
 NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName
 
-const NavigationMenuItem = NavigationMenuPrimitive.Item
+const NavigationMenuItem = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Item>
+>(({ className, ...props }, ref) => (
+  <NavigationMenuPrimitive.Item
+    ref={ref}
+    // `relative` makes this item the positioning context for its absolutely
+    // positioned NavigationMenuContent, so the dropdown anchors to THIS trigger.
+    className={cn("relative", className)}
+    {...props}
+  />
+))
+NavigationMenuItem.displayName = NavigationMenuPrimitive.Item.displayName
 
 const navigationMenuTriggerStyle = cva(
   "group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-surface hover:text-foreground focus:bg-surface focus:text-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-surface/50"
@@ -71,7 +86,11 @@ const NavigationMenuContent = React.forwardRef<
   <NavigationMenuPrimitive.Content
     ref={ref}
     className={cn(
-      "left-0 top-0 w-full data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 md:absolute md:w-auto",
+      // Anchor directly below the trigger (top-full), left-aligned (left-0),
+      // with a small 6px gap (mt-1.5). The panel carries its own popover
+      // surface styling since there is no shared Viewport.
+      "absolute left-0 top-full z-50 mt-1.5 w-max rounded-md border border-border bg-popover text-popover-foreground shadow-lg",
+      "data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[state=open]:zoom-in-90 data-[state=closed]:zoom-out-95",
       className
     )}
     {...props}

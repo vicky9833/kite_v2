@@ -96,7 +96,7 @@ export function Header({
             <span className="font-heading text-[22px] font-bold tracking-tight text-white">
               KITE
             </span>
-            <span className="hidden text-[11px] leading-tight text-white/70 sm:block">
+            <span className="hidden text-[11px] leading-tight text-white/70 xl:block">
               Karnataka Innovation &amp; Technology Ecosystem
             </span>
           </span>
@@ -109,7 +109,7 @@ export function Header({
               <NavigationMenuItem key={item.label}>
                 <NavigationMenuTrigger
                   className={cn(
-                    "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[state=open]:bg-white/10 data-[state=open]:text-white",
+                    "px-3 bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[state=open]:bg-white/10 data-[state=open]:text-white",
                     focusRing,
                   )}
                 >
@@ -147,7 +147,7 @@ export function Header({
             aria-label="Search"
             onClick={onOpenSearch}
             className={cn(
-              "hidden items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white md:inline-flex",
+              "hidden items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white xl:inline-flex",
               focusRing,
             )}
           >
@@ -156,13 +156,13 @@ export function Header({
               {utilityNav.searchShortcut}
             </kbd>
           </button>
-          {/* Compact search trigger for small viewports */}
+          {/* Compact search trigger for small + intermediate viewports */}
           <button
             type="button"
             aria-label="Search"
             onClick={onOpenSearch}
             className={cn(
-              "inline-flex items-center justify-center rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white md:hidden",
+              "inline-flex items-center justify-center rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white xl:hidden",
               focusRing,
             )}
           >
@@ -174,7 +174,7 @@ export function Header({
             type="button"
             onClick={toggleLanguage}
             className={cn(
-              "hidden rounded-lg px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white sm:inline-flex",
+              "hidden rounded-lg px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white xl:inline-flex",
               focusRing,
             )}
           >
@@ -187,7 +187,7 @@ export function Header({
               type="button"
               aria-label="Notifications"
               className={cn(
-                "inline-flex items-center justify-center rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white",
+                "hidden items-center justify-center rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white xl:inline-flex",
                 focusRing,
               )}
             >
@@ -199,7 +199,7 @@ export function Header({
           <Link
             href={utilityNav.signInHref}
             className={cn(
-              "hidden rounded-lg px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 lg:inline-flex",
+              "hidden rounded-lg px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 xl:inline-flex",
               focusRing,
             )}
           >

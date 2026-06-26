@@ -27,9 +27,10 @@
 //  - Key derived invariants: `approved = floor(applications * ratio)` so
 //    `approved ≤ applications`; `fundingIntensity ∈ [0, 1]`;
 //    `completionPct ∈ [0, 100]`.
-//  - The `ADMIN_KPIS` values are the FIXED figures mandated by Req 12 (16,234;
-//    ₹312 crore; 22; 1,847; ₹19 lakh; 183) — constants, not random. The UI
-//    still surfaces them with an illustrative label.
+//  - The `ADMIN_KPIS` values track the verified figures (21,847 registered
+//    startups — just above the verified 21,000+ DPIIT figure as of the current
+//    quarter; ₹312 crore; 22; 1,847; ₹19 lakh; 183) — constants, not random.
+//    The UI still surfaces them with an illustrative label.
 //  - All synthetic figures are illustrative; the UI labels them as such.
 // ===========================================================================
 
@@ -71,7 +72,7 @@ export const ADMIN_KPIS: readonly KpiCard[] = [
   {
     id: 'total-registered-startups',
     label: 'Total Registered Startups',
-    value: '16,234',
+    value: '21,847',
     trend: '+4.2% QoQ',
   },
   {
