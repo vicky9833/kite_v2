@@ -132,9 +132,23 @@ Four principles held across all eight prompts:
 
 ## Status
 
-Feature-complete — **v1.0.1**. All eight prompt slices shipped; the full test
+Feature-complete — **v1.0.2**. All eight prompt slices shipped; the full test
 suite passes; the production build succeeds with every route under the 150KB
 First Load JS ceiling.
+
+### v1.0.2 — all routes live
+
+Every remaining route that previously rendered the `StubPage` placeholder is now
+a real content page — no route shows "content forthcoming" or redirects to home.
+Data-backed detail pages (`/clusters/[id]`, `/policies/[id]`, `/programs/[slug]`,
+`/events/[id]`) render verified data with `generateStaticParams`; index pages
+(`/clusters`, `/policies`, `/coe`, `/intelligence`) render real grids; stakeholder
+pages (`/startups`, `/students`, `/universities`, `/corporates`, `/procurement`,
+`/jobs`), investor sub-pages (`/investors/co-invest`, `/investors/pipeline`,
+`/investors/submit`), institutional pages (`/about`, `/contact`, `/sitemap`,
+`/signin`, `/developers`, `/tenders`), and legal pages (`/privacy`, `/terms`,
+`/accessibility`, `/rti`) all carry credible institutional content built on a
+shared `PageShell` scaffold. Every upgraded route holds ~107KB First Load JS.
 
 ### v1.0.1 — production polish patch
 

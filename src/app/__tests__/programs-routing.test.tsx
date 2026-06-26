@@ -103,7 +103,7 @@ describe("programs routing — static segments outrank the [slug] fallback", () 
     expect(root.queryByText(STUB_FORTHCOMING)).toBeNull();
   });
 
-  it("still renders the humanized [slug] stub for a non-special slug", () => {
+  it("still renders a humanized [slug] page for a non-special slug", () => {
     const { container } = render(
       <ProgramDetailPage params={{ slug: "some-other-program" }} />,
     );
@@ -114,10 +114,11 @@ describe("programs routing — static segments outrank the [slug] fallback", () 
       screen.getByRole("heading", { level: 1, name: "Some Other Program" }),
     ).toBeInTheDocument();
 
-    // And it is the StubPage — the forthcoming placeholder copy is present.
-    expect(root.getByText(STUB_FORTHCOMING)).toBeInTheDocument();
+    // The page is now a real content surface — the old StubPage "forthcoming"
+    // placeholder copy must NOT be present.
+    expect(root.queryByText(STUB_FORTHCOMING)).toBeNull();
 
-    // Sanity: the stub does NOT carry the editorial program content.
+    // Sanity: it does NOT carry the dedicated editorial program content.
     expect(root.queryByText(/306 startups/i)).toBeNull();
     expect(root.queryByText(/wrkwrk in Silicon Beach Mangaluru/i)).toBeNull();
   });
