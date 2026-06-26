@@ -81,7 +81,7 @@ export function Header({
     <header className="fixed inset-x-0 top-0 z-50 h-16 w-full bg-dark text-white">
       <nav
         aria-label="Primary"
-        className="mx-auto flex h-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
+        className="mx-auto flex h-full max-w-screen-2xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
       >
         {/* Left: brand lockup */}
         <Link
@@ -92,13 +92,8 @@ export function Header({
           )}
         >
           <Rocket aria-hidden className="h-7 w-7 text-accent" />
-          <span className="flex flex-col leading-none">
-            <span className="font-heading text-[22px] font-bold tracking-tight text-white">
-              KITE
-            </span>
-            <span className="hidden text-[11px] leading-tight text-white/70 2xl:block">
-              Karnataka Innovation &amp; Technology Ecosystem
-            </span>
+          <span className="font-heading text-[22px] font-bold tracking-tight text-white">
+            KITE
           </span>
         </Link>
 
