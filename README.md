@@ -132,9 +132,21 @@ Four principles held across all eight prompts:
 
 ## Status
 
-Feature-complete — **v1.0.2**. All eight prompt slices shipped; the full test
+Feature-complete — **v1.0.3**. All eight prompt slices shipped; the full test
 suite passes; the production build succeeds with every route under the 150KB
 First Load JS ceiling.
+
+### v1.0.3 — hero carousel
+
+The home hero is now a 4-slide carousel (Ecosystem · Beyond Bengaluru · Vision
+2030 · Global Innovation Alliance) with license-clean, hand-drawn SVG visuals (a
+Karnataka cluster map, a cluster network, a funding chart, and an alliance
+globe) and a drop-in portrait slot for an official Chief Minister photo
+(`public/hero/cm-portrait.jpg`, with a neutral emblem fallback). Only the active
+slide renders (keyed fade), so there is exactly one `h1` and no `aria-hidden`
+focusable content; auto-advance pauses on hover/focus and under reduced-motion,
+with keyboard-operable Prev/Next/dot/Pause controls. Home holds ~144KB First
+Load JS.
 
 ### v1.0.2 — all routes live
 
