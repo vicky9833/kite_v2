@@ -227,21 +227,22 @@ describe("Home page overflow safety", () => {
 /* -------------------------------------------------------------------------- */
 
 describe("Header responsive nav gating", () => {
-  it("gates the desktop nav (hidden lg:flex) and the hamburger (lg:hidden)", () => {
+  it("gates the desktop nav (hidden xl:flex) and the hamburger (xl:hidden)", () => {
     const { container } = render(
       <LanguageProvider>
         <Header />
       </LanguageProvider>,
     );
 
-    // Desktop center navigation is hidden on small screens, shown at lg.
-    expect(hasElementWithAll(container, ["hidden", "lg:flex"])).toBe(true);
+    // Desktop center navigation is hidden below xl, shown at xl (the 6 wide
+    // dropdowns + utility cluster need ≥1280px to fit without overflow).
+    expect(hasElementWithAll(container, ["hidden", "xl:flex"])).toBe(true);
 
-    // The hamburger ("Open menu") is shown on small screens, hidden at lg.
+    // The hamburger ("Open menu") is shown below xl, hidden at xl.
     const hamburger = container.querySelector<HTMLElement>(
       '[aria-label="Open menu"]',
     );
     expect(hamburger).not.toBeNull();
-    expect(hamburger?.className).toContain("lg:hidden");
+    expect(hamburger?.className).toContain("xl:hidden");
   });
 });

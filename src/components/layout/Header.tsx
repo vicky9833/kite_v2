@@ -96,20 +96,21 @@ export function Header({
             <span className="font-heading text-[22px] font-bold tracking-tight text-white">
               KITE
             </span>
-            <span className="hidden text-[11px] leading-tight text-white/70 xl:block">
+            <span className="hidden text-[11px] leading-tight text-white/70 2xl:block">
               Karnataka Innovation &amp; Technology Ecosystem
             </span>
           </span>
         </Link>
 
-        {/* Center: desktop dropdown navigation (≥ lg) */}
-        <NavigationMenu className="hidden lg:flex">
+        {/* Center: desktop dropdown navigation (≥ xl — below xl the hamburger
+            opens the full MobileNav so the 6 wide dropdowns never overflow) */}
+        <NavigationMenu className="hidden xl:flex">
           <NavigationMenuList>
             {dropdownItems.map((item) => (
               <NavigationMenuItem key={item.label}>
                 <NavigationMenuTrigger
                   className={cn(
-                    "px-3 bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[state=open]:bg-white/10 data-[state=open]:text-white",
+                    "px-2.5 bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[state=open]:bg-white/10 data-[state=open]:text-white",
                     focusRing,
                   )}
                 >
@@ -147,7 +148,7 @@ export function Header({
             aria-label="Search"
             onClick={onOpenSearch}
             className={cn(
-              "hidden items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white xl:inline-flex",
+              "hidden items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white 2xl:inline-flex",
               focusRing,
             )}
           >
@@ -162,7 +163,7 @@ export function Header({
             aria-label="Search"
             onClick={onOpenSearch}
             className={cn(
-              "inline-flex items-center justify-center rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white xl:hidden",
+              "inline-flex items-center justify-center rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white 2xl:hidden",
               focusRing,
             )}
           >
@@ -174,7 +175,7 @@ export function Header({
             type="button"
             onClick={toggleLanguage}
             className={cn(
-              "hidden rounded-lg px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white xl:inline-flex",
+              "hidden rounded-lg px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white 2xl:inline-flex",
               focusRing,
             )}
           >
@@ -187,7 +188,7 @@ export function Header({
               type="button"
               aria-label="Notifications"
               className={cn(
-                "hidden items-center justify-center rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white xl:inline-flex",
+                "hidden items-center justify-center rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white 2xl:inline-flex",
                 focusRing,
               )}
             >
@@ -217,13 +218,13 @@ export function Header({
             Register
           </Link>
 
-          {/* Hamburger — opens MobileNav (< lg). Wired in task 2.4 / 2.9. */}
+          {/* Hamburger — opens MobileNav (< xl). Wired in task 2.4 / 2.9. */}
           <button
             type="button"
             aria-label="Open menu"
             onClick={onOpenMobileNav}
             className={cn(
-              "inline-flex items-center justify-center rounded-lg p-2 text-white transition-colors hover:bg-white/10 lg:hidden",
+              "inline-flex items-center justify-center rounded-lg p-2 text-white transition-colors hover:bg-white/10 xl:hidden",
               focusRing,
             )}
           >
